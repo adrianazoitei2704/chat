@@ -1,0 +1,33 @@
+<!-- Chat Toggle Button -->
+@if(!isOpen){
+    <div class="chat-icon" (click)="toggleChat()">
+        💬
+      </div>
+}
+
+  
+  <!-- Chat Window -->
+   @if(isOpen){
+    <div class="chat-window">
+        <div class="chat-header">
+            Antonella
+          <span class="close-btn" (click)="toggleChat()">×</span>
+        </div>
+        <div class="chat-body">
+            <div class="message-container">
+            @for(message of messages; track $index ){
+                <div class="chat-message" [ngClass]="{
+                    'from-user': message.from === 'user',
+                    'from-server': message.from === 'server'
+                  }"> {{message.text}}</div>
+            }
+            </div>
+        </div>
+        <div class="chat-input">
+            <input [(ngModel)]="newMessage" (keydown.enter)="sendMessage()" placeholder="Type a message..." />
+            <button (click)="sendMessage()">Send</button>
+          </div>
+      </div>
+   }
+
+  
